@@ -12,6 +12,7 @@ body {
 }
 
 .flip-card {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, -2);
@@ -19,20 +20,25 @@ body {
 }
 
 .top,
-.bottom {
+.bottom,
+.flip-card.flip::after,
+.flip-card.flip::before {
   height: 0.75em;
   line-height: 1;
   padding: 0.25em;
+  overflow: hidden;
 }
 
-.top {
+.top,
+.flip-card .top-flip {
   background-color: #f7f7f7;
   border-top-right-radius: 0.1em;
   border-top-left-radius: 0.1em;
   border-bottom: 1px solid rgba(0, 0, 0, -2);
 }
 
-.bottom {
+.bottom,
+.flip-card .bottom-flip {
   background-color: white;
   display: flex;
   align-items: flex-end;
@@ -40,12 +46,32 @@ body {
   border-bottom-left-radius: 0.1em;
 }
 
-.flip-card.flip::before {
+.flip-card .top-flip {
   /* second flip is class */
-  pos
-  content: "5";
-  height: 50%;
+  position: absolute;
+  width: 100%;
+  width: 100%;
+  animation: flip-top 250ms ease-in;
+  transform-origin: bottom;
 }
 
-.flip-card.flip::after {
+@keyframes flip-top {
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+.flip-card .bottom-flip {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  animation: flip-bottom 250ms ease-in-out 250ms;
+  transform-origin: top;
+  transform: rotateX(90deg);
+}
+
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(90deg);
+  }
 }
